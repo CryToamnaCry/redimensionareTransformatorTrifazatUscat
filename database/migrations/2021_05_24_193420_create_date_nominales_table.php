@@ -17,13 +17,14 @@ class CreateDateNominalesTable extends Migration
             $table->id();
             $table->timestamps();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->string('sn');
-            $table->string('f');
-            $table->string('u1n');
-            $table->string('u2n');
+            $table->string('sn_VA');
+            $table->string('f_Hz');
+            $table->string('u1n_V');
+            $table->string('u2n_V');
             $table->string('conexiune');
             $table->string('uscn');
-            $table->string('pscn');
+            $table->string('pscn_W');
+            $table->string('factorForma');
 
         });
     }

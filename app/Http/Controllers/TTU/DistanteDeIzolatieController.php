@@ -65,7 +65,7 @@ class DistanteDeIzolatieController extends Controller
         return $intaltaTensiune;  
     }
 
-    public function transformatorUscatUIncercare($Un)
+    public static function transformatorUscatUIncercare($Un)
     {
         //tensiunile de incarcare pentru frecvente de 50Hz,in functie de tensiunile de linie
         if($Un<=550) //V
@@ -87,7 +87,7 @@ class DistanteDeIzolatieController extends Controller
         return $UIncercare;//V
     }
 
-    public function transformatorUscatJT(){
+    public  static function transformatorUscatJT(){
         //Distante de izolare pt joasa tensiune si UIncercare=3kV
         $joasaTensiune=array(
             "loj" => Converter::from('length.mm')->to('length.m')->convert(1.5)->getValue(),
@@ -98,7 +98,7 @@ class DistanteDeIzolatieController extends Controller
     return $joasaTensiune;
     }
 
-    public function transformatorUscatIT($UIncercare){
+    public static function transformatorUscatIT($UIncercare){
         //Distanta de izolare pentru inalta tensiune
         if($UIncercare<=3000)//Un[V]
         { 

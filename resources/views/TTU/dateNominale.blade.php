@@ -256,6 +256,30 @@
                 </div>
             </div>
             <hr>
+                        {{-- 
+
+                Factor de forma
+
+             --}}
+             <div class="flex flex-wrap -mx-3 mb-2">
+                <div class="w-full md:w-2/3 px-3 mb-6 md:mb-0">
+                    <label class="block uppercase tracking-wide text-gray-900 text-m font-bold mb-2" for="factorForma">
+                        Factor de forma
+                    </label>
+                    <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500
+                    @error('factorForma') border-red-500  
+                    @enderror"
+                    id="factorForma" name="factorForma" type="text" placeholder="F " value="{{ old('factorForma') }}">
+
+                    @error('factorForma')
+                        <div class="text-red-500 mt-2 text-sm">
+                            {{ $message }}
+                        </div>
+                    @enderror
+
+                </div>
+            </div>
+            <hr>
             {{-- 
                 
                 Puterea la scurtcircuit nominal

@@ -15,12 +15,12 @@ class S1CalcululMarimilorDeFazaController extends Controller
     public function creareMarimiDeFaza(Request $request)
     {
         $dateNominale = DateNominale::latest()->where('user_id',$request->user()->id)->first();
-        $sn = $dateNominale->sn;
-        $u1n = $dateNominale->u1n;
-        $u2n = $dateNominale->u2n;
+        $sn = $dateNominale->sn_VA;
+        $u1n = $dateNominale->u1n_V;
+        $u2n = $dateNominale->u2n_V;
         $infasPrimara = substr($dateNominale->conexiune,0,1);
         $infasSec = substr($dateNominale->conexiune,1,1);
-
+        
         $i1n = $sn/(sqrt(3)*$u1n);
         $i2n = $sn/(sqrt(3)*$u2n);
 

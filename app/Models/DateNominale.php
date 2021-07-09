@@ -11,13 +11,14 @@ class DateNominale extends Model
 
     protected $fillable = [
         'user_id',
-        'sn',
-        'f',
-        'u1n',
-        'u2n',
+        'sn_VA',
+        'f_Hz',
+        'u1n_V',
+        'u2n_V',
         'conexiune',
         'uscn',
-        'pscn'
+        'pscn_W',
+        'factorForma'
 
     ];
 }
