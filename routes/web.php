@@ -10,6 +10,7 @@ use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\TTU\DateNominaleController;
 use App\Http\Controllers\TTU\DistanteDeIzolatieController;
+
 use App\Http\Controllers\TTU\RedimensionareFinalaController;
 use App\Http\Controllers\TTU\S1CalcululMarimilorDeFazaController;
 
@@ -39,7 +40,6 @@ Route::post('/redimensionare',[DateNominaleController::class,'store']);
 
 Route::get('/final',[RedimensionareFinalaController::class,'index'])->name('final');
 
-Route::get('/dinstante',[DistanteDeIzolatieController::class,'transformatorInUlei']);
 
 //login
 Route::get('/login',[LoginController::class,'index'])->name('login');

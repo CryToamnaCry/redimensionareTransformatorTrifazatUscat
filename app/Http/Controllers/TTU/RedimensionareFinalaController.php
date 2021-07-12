@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Controllers\TTU\RedimensionareFinalaController;
 use App\Http\Controllers\TTU\S1CalcululMarimilorDeFazaController;
 use App\Http\Controllers\coloana\PredimensionareColoanaController;
+use App\Http\Controllers\joasaTensiune\PredimensionareSpiraController;
+use App\Http\Controllers\joasaTensiune\PredeterminareSectiuneConductorJTController;
 
 
 
@@ -21,10 +23,14 @@ class RedimensionareFinalaController extends Controller
         $marimiDeFaza = new S1CalcululMarimilorDeFazaController;
         $marimiDeFaza->creareMarimiDeFaza($request);
 
-        $predimensionareColoana = new PredimensionareColoanaController;
-        $predimensionareColoana->store($request);
+        $predColoana = new PredimensionareColoanaController;
+        $predColoana->store($request);
 
-        
+        $predSpiraJT = new PredimensionareSpiraController;
+        $predSpiraJT->store($request);
+       
+        $predSectConductorJT = new PredeterminareSectiuneConductorJTController;
+        $predSectConductorJT->create($request);
 
         return view('TTU.final');
     }
