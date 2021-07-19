@@ -10,8 +10,9 @@ use App\Models\PredimensionareColoana;
 use App\Models\PredimensionareSpiraJT;
 use App\Http\Controllers\math\ExtraController;
 use Cartalyst\Converter\Laravel\Facades\Converter;
-use App\Http\Controllers\TTU\DistanteDeIzolatieController;
-use App\Http\Controllers\joasaTensiune\PredimensionareSpiraController;
+use App\Http\Controllers\STAS\DistanteDeIzolatieController;
+use App\Models\joasaTensiune\PredeterminareSectiuneConductorJT;
+
 
 class PredeterminareSectiuneConductorJTController extends Controller
 {
@@ -22,6 +23,7 @@ class PredeterminareSectiuneConductorJTController extends Controller
         $id = $dateNominale->id;
         $u2f = $dateNominale->u2n_V;
         $pscn_W = $dateNominale->pscn_W;
+        $nominale_id = $dateNominale->id;
 
         $faza = MarimiDeFaza::latest()->where('nominale_id',$id)->first();
         $I2f = $faza->i2f;
@@ -58,7 +60,7 @@ class PredeterminareSectiuneConductorJTController extends Controller
         $Lmed_m = Converter::from('length.mm')->to('length.m')->convert($Lmed_mm)->getValue();
 
         //Se estimeaza 
-        //  scond - Sectiunea conductorului
+        //  scond - Sectiunea conductorului JT
         $scond_mm2 = ($pCu*$Lmed_m*$wj)/$RjT;
         //dc - diametru conductor estimat
         $dc_mm = sqrt((4*$scond_mm2)/pi());
@@ -67,19 +69,37 @@ class PredeterminareSectiuneConductorJTController extends Controller
         //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         //dc din STAS(care STAS)????
         ////////////////////////////////
-        $dc_mm_rot = round($dc_mm);
         //////////////////////////////////
-        dd($dc_mm_rot,$dc_mm);
-
-        $sectiuneConduct= array( 
+       
+        return  $sectiuneConduct= array( 
+            'nominale_id' => $nominale_id,
             'PjT_W'=>$PjT,
             'RjT_ohm'=>$RjT,
-            'Dmj'=>$Dmj_mm,
-            'Lmed'=>$Lmed_mm,
-            'scond'=> $scond_mm2,
-            'dc' => $dc_mm
+            'Dmj_mm'=>$Dmj_mm,
+            'Lmed_mm'=>$Lmed_mm,
+            'scond_mm2'=> $scond_mm2,
+            'dc_calc_mm' => $dc_mm,
+            'aj_mm' => $aj_mm
         );
         
+        
+    }
+
+    public function store(Request $request)
+    {
+
+        $coloana = $this->create($request);
+     
+        PredeterminareSectiuneConductorJT::create([
+            'nominale_id' => $coloana['nominale_id'],
+            'PjT_W'=> $coloana['PjT_W'],
+            'RjT_ohm'=> $coloana['RjT_ohm'],
+            'Dmj_mm'=> $coloana['Dmj_mm'],
+            'Lmed_mm'=> $coloana['Lmed_mm'],
+            'scond_mm2'=> $coloana['scond_mm2'],
+            'dc_calc_mm' => $coloana['dc_calc_mm'],
+            'aj_mm' => $coloana['aj_mm']
+        ]);
 
     }
 }

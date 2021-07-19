@@ -9,7 +9,9 @@ use App\Http\Controllers\Controller;
 use App\Models\PredimensionareColoana;
 use App\Http\Controllers\math\MathStuffController;
 use Cartalyst\Converter\Laravel\Facades\Converter;
-use App\Http\Controllers\TTU\DistanteDeIzolatieController;
+use App\Http\Controllers\STAS\DistanteDeIzolatieController;
+
+
 
 class PredimensionareColoanaController extends Controller
 {

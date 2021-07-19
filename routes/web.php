@@ -9,10 +9,10 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\TTU\DateNominaleController;
-use App\Http\Controllers\TTU\DistanteDeIzolatieController;
+
 
 use App\Http\Controllers\TTU\RedimensionareFinalaController;
-use App\Http\Controllers\TTU\S1CalcululMarimilorDeFazaController;
+use App\Http\Controllers\STAS\DeterminareMarimiDeFazaController;
 
 
 

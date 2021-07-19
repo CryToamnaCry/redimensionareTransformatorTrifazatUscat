@@ -1,16 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\TTU;
+namespace App\Http\Controllers\STAS;
 
 use App\Models\DateNominale;
 use App\Models\MarimiDeFaza;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-
-class S1CalcululMarimilorDeFazaController extends Controller
+class DeterminareMarimiDeFazaController extends Controller
 {
-
     
     public function creareMarimiDeFaza(Request $request)
     {

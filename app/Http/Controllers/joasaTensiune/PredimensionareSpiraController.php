@@ -33,6 +33,7 @@ class PredimensionareSpiraController extends Controller
             'usp_V'=>$usp_V,
         );
         
+       
         return $spiraJT;
     }
     public function store(Request $request)
