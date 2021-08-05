@@ -15,7 +15,7 @@ class CreatePredimensionareColoanasTable extends Migration
     {
         Schema::create('predimensionare_coloanas', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('nominales_id');
+            $table->foreignId('nominale_id')->references('id')->on('date_nominales')->onDelete('cascade');
             $table->string('sc_VA');
             $table->string('usca');
             $table->string('uscr');

@@ -28,7 +28,7 @@ class PredeterminareSectiuneConductorJTController extends Controller
         $faza = MarimiDeFaza::latest()->where('nominale_id',$id)->first();
         $I2f = $faza->i2f;
 
-        $coloana = PredimensionareColoana::latest()->where('nominales_id',$id)->first();
+        $coloana = PredimensionareColoana::latest()->where('nominale_id',$id)->first();
         $sum_ajai_cm = $coloana->sum_ajai_cm;
         $D_m = $coloana->D_m;
 
@@ -90,7 +90,9 @@ class PredeterminareSectiuneConductorJTController extends Controller
 
         $coloana = $this->create($request);
      
-        PredeterminareSectiuneConductorJT::create([
+        PredeterminareSectiuneConductorJT::updateOrCreate([
+            'nominale_id' =>$coloana['nominale_id'] 
+        ],[
             'nominale_id' => $coloana['nominale_id'],
             'PjT_W'=> $coloana['PjT_W'],
             'RjT_ohm'=> $coloana['RjT_ohm'],

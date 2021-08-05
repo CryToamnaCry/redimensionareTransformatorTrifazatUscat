@@ -68,7 +68,7 @@ class PredimensionareColoanaController extends Controller
            $ac = $km*(pi()*pow($D_m,2))/4;
 
            $coloana = array( 
-            'dateNominales_id'=>$dateNominale->id,
+            'dateNominale_id'=>$dateNominale->id,
             'sc_VA'=>$sc,
             'usca'=>$usca,
             'uscr'=>$uscr,
@@ -90,9 +90,11 @@ class PredimensionareColoanaController extends Controller
 
         $coloana = $this->estimareDimensioniColoana($request);
      
-
-        PredimensionareColoana::create([
-            'nominales_id'=>$coloana['dateNominales_id'],
+        
+        PredimensionareColoana::updateOrCreate([
+            'nominale_id' =>$coloana['dateNominale_id'] 
+        ],[
+            'nominale_id'=>$coloana['dateNominale_id'],
             'sc_VA' => $coloana['sc_VA'],
             'usca'=>$coloana['usca'],
             'uscr'=>$coloana['uscr'],

@@ -15,7 +15,7 @@ class CreatePredeterminareSectiuneConductorJTSTable extends Migration
     {
         Schema::create('predeterminare_sectiune_conductor_j_t_s', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('nominale_id');
+            $table->foreignId('nominale_id')->references('id')->on('date_nominales')->onDelete('cascade');
             $table->string('PjT_W');
             $table->string('RjT_ohm');
             $table->string('Dmj_mm');
