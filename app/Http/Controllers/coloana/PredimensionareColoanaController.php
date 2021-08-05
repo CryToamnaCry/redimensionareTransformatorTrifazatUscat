@@ -61,13 +61,13 @@ class PredimensionareColoanaController extends Controller
         $d1 = ($sc_kVA*$factorForma*$al*$kr)/($f*$uscr*pow($km,2)*pow($BC,2));
         $d2 = 16*MathStuffController::NRoot($d1,4); //cm
 
-        $D_mm =round(Converter::from('length.cm')->to('length.mm')->convert($d2)->getValue(),-1) ;//mm STAS
+        $D_mm =MathStuffController::round_5(Converter::from('length.cm')->to('length.mm')->convert($d2)->getValue(),-1) ;//mm STAS
         $D_m = Converter::from('length.mm')->to('length.m')->convert($D_mm)->getValue();
 
            // ac [m^2] - aria coloanei
            $ac = $km*(pi()*pow($D_m,2))/4;
 
-           $coloana= array( 
+           $coloana = array( 
             'dateNominales_id'=>$dateNominale->id,
             'sc_VA'=>$sc,
             'usca'=>$usca,

@@ -15,6 +15,16 @@ class CreateDimensionareInfasurareJTControllersTable extends Migration
     {
         Schema::create('dimensionare_infasurare_j_t_controllers', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('nominale_id');
+            $table->string('PjT_W');
+            $table->string('Dmj_mm');
+            $table->string('Lmed_m');
+            $table->string('aj_mm');
+            $table->string('Rjt_ohm');
+            $table->string('qjT_Wperm2');
+            $table->string('spireStrat');
+            $table->string('nrStraturi');
+            $table->string('HBj_m');
             $table->timestamps();
         });
     }

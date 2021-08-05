@@ -13,5 +13,8 @@ class MathStuffController extends Controller
         return pow($number, (1/$nthRoot));
     }
 
-    
+    public static function round_5($in)
+{
+    return round(($in*2)/10)*5;
+}
 }
