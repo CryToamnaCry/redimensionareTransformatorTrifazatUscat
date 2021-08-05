@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDimensionareInfasurareJTControllersTable extends Migration
+class CreateDimensionareJTSTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateDimensionareInfasurareJTControllersTable extends Migration
      */
     public function up()
     {
-        Schema::create('dimensionare_infasurare_j_t_controllers', function (Blueprint $table) {
+        Schema::create('dimensionare_j_t_s', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('nominale_id');
+            $table->foreignId('nominale_id')->references('id')->on('date_nominales')->onDelete('cascade');
             $table->string('PjT_W');
             $table->string('Dmj_mm');
             $table->string('Lmed_m');
@@ -36,6 +36,6 @@ class CreateDimensionareInfasurareJTControllersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dimensionare_infasurare_j_t_controllers');
+        Schema::dropIfExists('dimensionare_j_t_s');
     }
 }

@@ -10,7 +10,7 @@ class PredimensionareColoana extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nominales_id',
+        'nominale_id',
         'sc_VA',
         'usca',
         'uscr',

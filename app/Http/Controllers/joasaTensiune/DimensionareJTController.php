@@ -1,22 +1,23 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\joasaTensiune;
 
 use App\Models\DateNominale;
 use App\Models\MarimiDeFaza;
 use Illuminate\Http\Request;
-use Cartalyst\Converter\Converter;
-use Illuminate\Routing\Controller;
+use App\Http\Controllers\Controller;
 use App\Models\PredimensionareColoana;
 use App\Models\PredimensionareSpiraJT;
+use App\Models\joasaTensiune\DimensionareJT;
 use App\Http\Controllers\math\ExtraController;
 use App\Http\Controllers\math\MathStuffController;
+use Cartalyst\Converter\Laravel\Facades\Converter;
 use App\Http\Controllers\STAS\DiametruConductorController;
 use App\Http\Controllers\STAS\DistanteDeIzolatieController;
 use App\Models\joasaTensiune\PredeterminareSectiuneConductorJT;
 use App\Http\Controllers\STAS\GrosimeaIzolatieiConductoruluiController;
 
-class DimensionareInfasurareJTController extends Controller
+class DimensionareJTController extends Controller
 {
     public function create(Request $request)
     {
@@ -28,58 +29,55 @@ class DimensionareInfasurareJTController extends Controller
         $factorForma = $dateNominale->factorForma;
 
     $faza = MarimiDeFaza::latest()->where('nominale_id',$id)->first();
-    $I2f = $faza->i2f;
+        $I2f = $faza->i2f;
 
     $uIncerc = DistanteDeIzolatieController::transformatorUscatUIncercare($u2f);
         $distanteDeIzolatie = DistanteDeIzolatieController::transformatorUscatJT($uIncerc);
         $aoj = $distanteDeIzolatie['aoj'];
+    
+    $distanteDeIzolatie = DistanteDeIzolatieController::transformatorUscatIT($uIncerc);
+        $aji = $distanteDeIzolatie['aji'];
+        
 
-    $coloana = PredimensionareColoana::latest()->where('nominales_id',$id)->first();
+    $coloana = PredimensionareColoana::latest()->where('nominale_id',$id)->first();
         $sum_ajai_cm = $coloana->sum_ajai_cm;
         $D_mm = Converter::from('length.m')->to('length.mm')->convert($coloana->D_m)->getValue();
 
     $spira = PredimensionareSpiraJT::latest()->where('nominale_id',$id)->first();
         $wj = $spira->wj_spire;
 
-   $STAS_dc_mm = GrosimeaIzolatieiConductoruluiController::giz_mm();
-   $STAS_giz_mm = DiametruConductorController::giz_mm(); 
-
-   $predimensionareJT = PredeterminareSectiuneConductorJT::latest()->where('nominales_id',$id)->first();
-   $PjT = $predimensionareJT->PjT_W;
-   $Lmed_mm = $predimensionareJT->Lmed_mm;
-   $s_cond_mm2 = $predimensionareJT->scond_mm2;
+    $predimensionareJT = PredeterminareSectiuneConductorJT::latest()->where('nominale_id',$id)->first();
+        $PjT = $predimensionareJT->PjT_W;
+        $Lmed_mm = $predimensionareJT->Lmed_mm;
+        $s_cond_mm2 = $predimensionareJT->scond_mm2;
+        $aj_mm = $predimensionareJT->aj_mm;
 
     ///////////////////////////////////////////
-    /////dc,giz -din STAS???
-    ///////////////////////////////////////////
-        
-
+    $STAS_giz_mm = GrosimeaIzolatieiConductoruluiController::giz_mm();
+    $STAS_dc_mm = DiametruConductorController::dc_stas_mm();      
+    //////////////////////////////////////////
     $diz = $STAS_dc_mm + $STAS_giz_mm;
+ 
     
-    
-    $aj_mm = Converter::from('length.cm')->to('length.mm')->convert($aj)->getValue();
     $aoj_mm = Converter::from('length.m')->to('length.mm')->convert($aoj)->getValue();
-    $Dmj_mm = $D+2*$aoj+2*$aj+$aji;
+    $aji_mm = Converter::from('length.m')->to('length.mm')->convert($aji)->getValue();
+    
 
-    $HB_mm = (pi()*$Dmj_mm)/$factorForma;
+    $Dm_mm = $D_mm+2*$aoj_mm+2*$aj_mm+$aji_mm;
+    $HB_mm = (pi()*$Dm_mm)/$factorForma;
+
+
     $spireStrat =MathStuffController::round_5(($HB_mm/$diz)-1);
-    $nrStraturi = round($wj/$spireStrat);
-    $HB_m = Converter::from('length.mm')->to('length.m')->convert($HB_mm)->getValue();
-    $Lmed_m = Converter::from('length.mm')->to('length.m')->convert($Lmed_mm)->getValue();
-    $qjT_Wperm2 = $PjT/(3*2*$HB_m*$Lmed_m);
+    $nrStraturi = MathStuffController::round_5(($wj/$spireStrat)+1);
 
     //se RECALCULEAZA
     $aj_mm = $diz*$nrStraturi;
 
-    //HBj - Inaltimea bobinajului jT
-    $HBj_m = ( $spireStrat/$nrStraturi+1)*$diz;
- 
         //verificam daca e nevoie sau nu sa adaugam canal de racire 
-        $redimensionare = ExtraController::canalDeRacire($nrStraturi,$diz,$D_mm,$aoj_mm,$wj,$s_cond_mm2,$I2f,$HBj_m);
-    
+        $redimensionare = ExtraController::canalDeRacire($aoj_mm,$aj_mm,$spireStrat,$diz,$D_mm,$wj,$s_cond_mm2,$I2f);  
 
-    $dimensionareInfasJT = array( 
-        'dateNominales_id'=>$id,
+    return array( 
+        'dateNominale_id'=>$id,
         'Dmj_mm'=>$redimensionare['Dmj_mm'],
         'Lmed_m'=>$redimensionare['LMed_m'],
         'Rjt_ohm'=>$redimensionare['Rjt_ohm'],
@@ -91,7 +89,6 @@ class DimensionareInfasurareJTController extends Controller
         'HBj_m'=>$redimensionare['HBj_m'] 
         
     );
-
     }
 
     public function store(Request $request)
@@ -99,9 +96,10 @@ class DimensionareInfasurareJTController extends Controller
 
         $coloana = $this->create($request);
      
-
-        DimensionareInfasurareJT::create([
-            'nominales_id'=>$coloana['dateNominales_id'],
+        DimensionareJT::updateOrCreate([
+            'nominale_id' =>$coloana['dateNominale_id'] 
+        ],[
+            'nominale_id' =>$coloana['dateNominale_id'],
             'Dmj_mm' => $coloana['Dmj_mm'],
             'Lmed_m'=>$coloana['Lmed_m'],
             'Rjt_ohm'=>$coloana['Rjt_ohm'],
@@ -111,12 +109,9 @@ class DimensionareInfasurareJTController extends Controller
             'spireStrat' =>$coloana['spireStrat'],
             'nrStraturi' =>$coloana['nrStraturi'],
             'HBj_m'=>$coloana['HBj_m']
-
-         
         ]);
    
       
  
     }
-   
 }

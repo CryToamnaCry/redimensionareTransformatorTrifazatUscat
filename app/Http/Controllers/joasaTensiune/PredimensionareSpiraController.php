@@ -16,7 +16,7 @@ class PredimensionareSpiraController extends Controller
         $f = $dateNominale->f_Hz;
         $id = $dateNominale->id;
         $u2f = $dateNominale->u2n_V;
-        $coloana = PredimensionareColoana::latest()->where('nominales_id',$id)->first();
+        $coloana = PredimensionareColoana::latest()->where('nominale_id',$id)->first();
         $BC = $coloana->BC;
         $AC = $coloana->AC_mp;
         
@@ -28,7 +28,7 @@ class PredimensionareSpiraController extends Controller
         $usp_V = $u2f/$wj;
 
         $spiraJT= array( 
-            'dateNominales_id'=>$id,
+            'dateNominale_id'=>$id,
             'wj_spire'=>$wj,
             'usp_V'=>$usp_V,
         );
@@ -40,8 +40,10 @@ class PredimensionareSpiraController extends Controller
     {
         $coloana = $this->predimensionareSpira($request);
      
-        PredimensionareSpiraJT::create([
-            'nominale_id'=>$coloana['dateNominales_id'],
+        PredimensionareSpiraJT::updateOrCreate([
+            'nominale_id' =>$coloana['dateNominale_id'] 
+        ],[
+            'nominale_id'=>$coloana['dateNominale_id'],
             'wj_spire'=>$coloana['wj_spire'],
             'usp_V'=>$coloana['usp_V'],
         ]);

@@ -16,7 +16,7 @@ class CreateMarimiDeFazaTable extends Migration
         Schema::create('marimi_de_fazas', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->foreignId('nominale_id');
+            $table->foreignId('nominale_id')->references('id')->on('date_nominales')->onDelete('cascade');
             $table->string('i1f');
             $table->string('i2f');
             $table->string('u1f');

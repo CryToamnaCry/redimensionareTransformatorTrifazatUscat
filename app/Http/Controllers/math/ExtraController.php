@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\math;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Controllers\STAS\DistanteDeIzolatieController;
 
 class ExtraController extends Controller
 {
@@ -12,35 +13,28 @@ class ExtraController extends Controller
         return 0.022;//ohm*mm^2 / m
     }
 
-    public static function canalDeRacire($aj_mm,$nrStraturi,$diz,$D_mm,$aoj_mm,$wj,$s_cond_mm2,$I2f,$HBj_m)
+    public static function canalDeRacire($aoj_mm,$aj_mm,$spireStrat,$diz,$D_mm,$wj,$s_cond_mm2,$I2f)
     {
-        
-        $recalcular = $this->recalculare($aj_mm,$nrStraturi,$diz,$D_mm,$aoj_mm,$wj,$s_cond_mm2,$I2f,$HBj_m);
+        $x = 2;
+        do {
+            //HBj - Inaltimea bobinajului jT
+            $HBj_m = (($spireStrat+1)*$diz)*0.001; //m
+            //Dmj - diametrul mediu JT
+            $Dmj_mm = $D_mm + 2*$aoj_mm+ $aj_mm;
+            //LMed - lungimea medie a spirei
+            $LMed_m = (pi()*$Dmj_mm)*0.001;
+            //$Rjt - rezistenta infasurarii JT
+            $Rjt_ohm = 0.022*(($wj*$LMed_m)/$s_cond_mm2);
+            //PjT -  pierderile Joule jT
+            $PjT_W = 3*$Rjt_ohm *pow($I2f,2);
+            //gjt - densitatea de cedare a caldurii
+            $gjT_Wperm2  = $PjT_W/(3*$x*$HBj_m*$LMed_m);
 
-        if($recalcular['gjT_Wperm2'] >= 450){
-            $aj_mm=$aj_mm+4;
-            $recalcular = $this->recalculare($aj_mm,$nrStraturi,$diz,$D_mm,$aoj_mm,$wj,$s_cond_mm2,$I2f,$HBj_m);
-        }else{
-            return $recalcular;
-        }
-    }
+            if($gjT_Wperm2 >= 450)
+                $aj_mm=$aj_mm+4;
+                $x=$x+2;
 
-    public function recalculare($aj_mm,$nrStraturi,$diz,$D_mm,$aoj_mm,$wj,$s_cond_mm2,$I2f,$HBj_m){
-
-        //HBj - Inaltimea bobinajului jT
-        $HBj_m = ( $spireStrat/$nrStraturi+1)*$diz;
-        //aj- latimea bobinajului jT
-        $aj_mm = ($nrStraturi*$diz)+$aci;//mm
-        //Dmj - diametrul mediu JT
-        $Dmj_mm = $D_mm + 2*$aoj_mm+ $aj_mm;
-        //LMed - lungimea medie a spirei
-        $LMed_m = (pi()*$Dmj_mm)*0.001;
-        //$Rjt - rezistenta infasurarii JT
-        $Rjt_ohm = $this->pCu()*(($wj*$LMed_m)/$s_cond_mm2);
-        //PjT -  pierderile Joule jT
-        $PjT_W = 3*$Rjt_ohm *pow($I2f,2);
-        //gjt - densitatea de cedare a caldurii
-        $gjT_Wperm2  = $PjT_W/(3*4*$HBj_m*$LMed_m);
+        }while ($gjT_Wperm2 >= 450);
 
         return array( 
             'aj_mm'=>$aj_mm,
@@ -52,4 +46,5 @@ class ExtraController extends Controller
             'HBj_m'=>$HBj_m         
         );
     }
+
 }

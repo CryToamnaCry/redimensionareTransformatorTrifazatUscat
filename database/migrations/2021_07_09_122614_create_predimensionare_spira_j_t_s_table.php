@@ -15,7 +15,7 @@ class CreatePredimensionareSpiraJTSTable extends Migration
     {
         Schema::create('predimensionare_spira_j_t_s', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('nominale_id');
+            $table->foreignId('nominale_id')->references('id')->on('date_nominales')->onDelete('cascade');
             $table->string('wj_spire');
             $table->string('usp_V');
             $table->timestamps();

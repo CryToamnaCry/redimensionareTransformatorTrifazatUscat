@@ -5,12 +5,12 @@ namespace App\Models\joasaTensiune;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class DimensionareInfasurareJT extends Model
+class DimensionareJT extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'nominales_id',
+        'nominale_id',
         'Dmj_mm' ,
         'Lmed_m',
         'Rjt_ohm',
