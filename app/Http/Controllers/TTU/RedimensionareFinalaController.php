@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\joasaTensiune\DimensionareJTController;
 use App\Http\Controllers\STAS\DeterminareMarimiDeFazaController;
+use App\Http\Controllers\inaltaTensiune\DimensionareITController;
 use App\Http\Controllers\coloana\PredimensionareColoanaController;
 use App\Http\Controllers\joasaTensiune\PredimensionareSpiraController;
 use App\Http\Controllers\joasaTensiune\PredeterminareSectiuneConductorJTController;
@@ -34,6 +35,9 @@ class RedimensionareFinalaController extends Controller
 
         $dimensionareJT = new DimensionareJTController;
         $dimensionareJT->store($request);
+
+        $dimensionareIT = new DimensionareITController;
+        $dimensionareIT->store($request);
 
         return view('TTU.final');
     }
