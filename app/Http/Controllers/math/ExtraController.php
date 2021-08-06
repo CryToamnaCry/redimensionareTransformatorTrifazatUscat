@@ -16,6 +16,7 @@ class ExtraController extends Controller
     public static function canalDeRacire($aoj_mm,$aj_mm,$spireStrat,$diz,$D_mm,$wj,$s_cond_mm2,$I2f)
     {
         $x = 2;
+        $msg = 'Nu exista canal de racire';
         do {
             //HBj - Inaltimea bobinajului jT
             $HBj_m = (($spireStrat+1)*$diz)*0.001; //m
@@ -30,10 +31,11 @@ class ExtraController extends Controller
             //gjt - densitatea de cedare a caldurii
             $gjT_Wperm2  = $PjT_W/(3*$x*$HBj_m*$LMed_m);
 
-            if($gjT_Wperm2 >= 450)
+            if($gjT_Wperm2 >= 450){
+                $msg = 'Exista canal de racire';
                 $aj_mm=$aj_mm+4;
                 $x=$x+2;
-
+            }
         }while ($gjT_Wperm2 >= 450);
 
         return array( 
@@ -43,7 +45,8 @@ class ExtraController extends Controller
             'Rjt_ohm'=>$Rjt_ohm,
             'PjT_W'=>$PjT_W,
             'qjT_Wperm2'=>$gjT_Wperm2,
-            'HBj_m'=>$HBj_m         
+            'HBj_m'=>$HBj_m,
+            'msg'=>$msg,         
         );
     }
 
