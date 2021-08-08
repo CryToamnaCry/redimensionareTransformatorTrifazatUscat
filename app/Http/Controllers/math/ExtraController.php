@@ -13,6 +13,11 @@ class ExtraController extends Controller
         return 0.022;//ohm*mm^2 / m
     }
 
+    public static function kFe()
+    {
+        return 0.95;
+    }
+
     public static function canalDeRacire($aoj_mm,$aj_mm,$spireStrat,$diz,$D_mm,$wj,$s_cond_mm2,$I2f)
     {
         $x = 2;

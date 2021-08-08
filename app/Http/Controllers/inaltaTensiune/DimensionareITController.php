@@ -124,7 +124,7 @@ class DimensionareITController extends Controller
     {
         $IT = $this->dimensionare($request);
 //dd($IT);
-        DimensionareIT::updateOrCreate([
+        $contents_arr = DimensionareIT::updateOrCreate([
             'nominale_id' =>$IT['nominale_id'] 
         ],[
             'nominale_id' => $IT['nominale_id'],
@@ -142,6 +142,18 @@ class DimensionareITController extends Controller
             'nrStraturi'=> $IT['nrStraturi'],
             'msg' => $IT['msg']
         ]);
+
+        if($contents_arr) {
+            return response()->json([
+                'status' => 'success',
+                'data' => $contents_arr
+            ]);
+        }
+        return response()->json([
+            'status' => 'fail',
+            'message' => 'failed to create content_arr record'
+        ]);
+            
     }
 
 }

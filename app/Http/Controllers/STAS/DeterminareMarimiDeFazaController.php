@@ -41,7 +41,9 @@ class DeterminareMarimiDeFazaController extends Controller
         $snVerificare1 = 3*$u1f*$i1f;
         $snVerificare2 = 3*$u2f*$i2f;
 
-        MarimiDeFaza::create([
+        MarimiDeFaza::updateOrCreate([
+            'nominale_id' =>$dateNominale->id 
+        ],[
             'nominale_id'=>$dateNominale->id,
             'i1f'=>$i1f,
             'i2f'=>$i2f,

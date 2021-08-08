@@ -8,6 +8,7 @@ use App\Http\Controllers\joasaTensiune\DimensionareJTController;
 use App\Http\Controllers\STAS\DeterminareMarimiDeFazaController;
 use App\Http\Controllers\inaltaTensiune\DimensionareITController;
 use App\Http\Controllers\coloana\PredimensionareColoanaController;
+use App\Http\Controllers\miezFeromagnetic\MiezFeromagneticController;
 use App\Http\Controllers\joasaTensiune\PredimensionareSpiraController;
 use App\Http\Controllers\joasaTensiune\PredeterminareSectiuneConductorJTController;
 
@@ -38,6 +39,9 @@ class RedimensionareFinalaController extends Controller
 
         $dimensionareIT = new DimensionareITController;
         $dimensionareIT->store($request);
+
+        $miez = new MiezFeromagneticController;
+        $miez->store($request);
 
         return view('TTU.final');
     }
