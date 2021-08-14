@@ -17,6 +17,7 @@ class PredeterminareSectiuneConductorJT extends Model
         'Lmed_mm',
         'scond_mm2',
         'dc_calc_mm',
+        'dc_ales_mm',
         'aj_mm'
 
     ];

@@ -103,6 +103,7 @@ class MiezFeromagneticController extends Controller
     //5.VOLUM JUG
     $Vjug_kg = 2*($Ajug_mm2*10^-6)*($L_mm*10^-6);
     $Mjug_kg = 7650*$Vjug_kg;
+    
 
      $db= array(
     'nominale_id'=>$id,
@@ -126,8 +127,8 @@ class MiezFeromagneticController extends Controller
             'nominale_id' =>$miez['nominale_id'] 
         ],[
             'nominale_id'=>$miez['nominale_id'],
-            'TrepteColoana_a_mm'=>$miez['TrepteColoana_a_mm'],
-            'TrepteJug_b_mm'=>$miez['TrepteJug_b_mm'],
+            'TrepteColoana_a_mm'=>implode(",", $miez['TrepteColoana_a_mm']),
+            'TrepteJug_b_mm'=>implode(",", $miez['TrepteJug_b_mm']),
             'Bc_T'=>$miez['Bc_T'],
             'Bjug_T'=>$miez['Bjug_T'],
             'H_mm'=>$miez['H_mm'],

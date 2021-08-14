@@ -39,11 +39,13 @@ class PredimensionareColoanaController extends Controller
         //putere pe o coloana
         $sc=$sn/3;
         // usca - componenta activa a tensiunii de scurtcircuit 
-        $usca = ($pscn/$sn)*100;
+        $usca = ($pscn/($sn))*100;
+       
         // uscr - componenta reactiva a tensiunii de scurtrcircuit
         //uscn - tensiunea de scurtcircuit
+ 
         $uscr = sqrt(pow($uscn,2)-pow($usca,2)); //[%]
-       
+
         // al -latimea echivalenta a canalului de dispersie 
         $sc_kVA =  Converter::from('putereAparenta.VA')->to('putereAparenta.kVA')->convert($sc)->getValue();
         $sum_ajai= 3*0.6*MathStuffController::NRoot($sc_kVA,4);//cm

@@ -29,6 +29,7 @@ class CreateDimensionareITSTable extends Migration
             $table->string('nrStraturi');
             $table->string('ai_mm');
             $table->string('msg'); 
+            $table->string('dci_Mm');
             $table->timestamps();
         });
     }

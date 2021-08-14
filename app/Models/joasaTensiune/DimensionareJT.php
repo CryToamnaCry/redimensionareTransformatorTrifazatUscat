@@ -19,7 +19,9 @@ class DimensionareJT extends Model
         'qjT_Wperm2',
         'spireStrat',
         'nrStraturi',
-        'HBj_m'
+        'HBj_m',
+        'wj',
+        'msg'
 
     ];
 }

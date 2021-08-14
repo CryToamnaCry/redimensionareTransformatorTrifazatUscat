@@ -65,6 +65,8 @@ class PredeterminareSectiuneConductorJTController extends Controller
         //dc - diametru conductor estimat
         $dc_mm = sqrt((4*$scond_mm2)/pi());
 
+        $dc_ales_mm = 2.3;
+
         
         //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         //dc din STAS(care STAS)????
@@ -79,7 +81,8 @@ class PredeterminareSectiuneConductorJTController extends Controller
             'Lmed_mm'=>$Lmed_mm,
             'scond_mm2'=> $scond_mm2,
             'dc_calc_mm' => $dc_mm,
-            'aj_mm' => $aj_mm
+            'aj_mm' => $aj_mm,
+            'dc_ales_mm'=>$dc_ales_mm
         );
         
         
@@ -100,6 +103,7 @@ class PredeterminareSectiuneConductorJTController extends Controller
             'Lmed_mm'=> $coloana['Lmed_mm'],
             'scond_mm2'=> $coloana['scond_mm2'],
             'dc_calc_mm' => $coloana['dc_calc_mm'],
+            'dc_ales_mm' =>$coloana['dc_ales_mm'],
             'aj_mm' => $coloana['aj_mm']
         ]);
 

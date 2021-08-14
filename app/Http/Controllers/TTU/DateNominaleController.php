@@ -75,7 +75,7 @@ class DateNominaleController extends Controller
 
      
 
-        return Redirect::action('App\Http\Controllers\TTU\RedimensionareFinalaController@index');
+        return Redirect::action('App\Http\Controllers\TTU\RedimensionareFinalaController@store');
 
     }
 }

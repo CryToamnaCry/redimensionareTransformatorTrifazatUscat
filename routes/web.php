@@ -6,11 +6,12 @@ use App\Http\Controllers\PostLikeController;
 use App\Http\Controllers\UserPostController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
+
+
 use App\Http\Controllers\TTU\DateNominaleController;
-
-
 use App\Http\Controllers\TTU\RedimensionareFinalaController;
 use App\Http\Controllers\STAS\DeterminareMarimiDeFazaController;
 
@@ -33,13 +34,15 @@ Route::get('/',function(){
 Route::get('/users/{user:username}/posts',[UserPostController::class,'index'])->name('users.posts');
 
 Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
+Route::post('/dashboard',[DashboardController::class,'fileUpload']);
 
 // TTU
 Route::get('/redimensionare',[DateNominaleController::class,'index'])->name('redimensionare');
 Route::post('/redimensionare',[DateNominaleController::class,'store']);
 
-Route::get('/final',[RedimensionareFinalaController::class,'index'])->name('final');
-
+Route::get('/final',[RedimensionareFinalaController::class,'store'])->name('final');
+//admin
+Route::get('/admin',[AdminController::class,'index'])->name('admin');
 
 //login
 Route::get('/login',[LoginController::class,'index'])->name('login');
@@ -58,4 +61,3 @@ Route::delete('/posts/{post}',[PostController::class,'destroy'])->name('posts.de
 
 Route::post('/posts/{post}/likes',[PostLikeController::class,'store'])->name('posts.likes');
 Route::delete('/posts/{post}/likes',[PostLikeController::class,'destroy'])->name('posts.likes');
-
