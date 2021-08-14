@@ -77,7 +77,8 @@ class DimensionareITController extends Controller
             'aoj_mm' => $aoj_mm,
             'D_mm' => $D_mm,
             'I2f' => $I2f,
-            'HBj_mm' =>$HBj_mm
+            'HBj_mm' =>$HBj_mm,
+            'dci'=>$dci,
         );
     }
 
@@ -107,23 +108,25 @@ class DimensionareITController extends Controller
         //verificam daca e nevoie sau nu sa adaugam canal de racire 
         $redimensionare = ExtraController::canalDeRacire($aoj_mm,$ai_mm,$nrSpire,$dciTotale,$D_mm,$wi,$Sci,$I2f);
 
+
         $redimensionare+=[
             'nominale_id'=>$predimensionare['nominale_id'],
             'wi' => $wi,
             'E' => $predimensionare['E'],
             'wiTotal' => $wiTotal,
             'nrSpirel' => $nrSpire,
-            'nrStraturi' => $nrStraturi,      
+            'nrStraturi' => $nrStraturi, 
+            'dci'=>$predimensionare['dci']
+                 
         ];
 
-      
         return $redimensionare;
     }
 
     public function store(Request $request)
     {
         $IT = $this->dimensionare($request);
-//dd($IT);
+
         $contents_arr = DimensionareIT::updateOrCreate([
             'nominale_id' =>$IT['nominale_id'] 
         ],[
@@ -140,19 +143,10 @@ class DimensionareITController extends Controller
             'wiTotal'=> $IT['wiTotal'],
             'nrSpire'=> $IT['nrSpirel'],
             'nrStraturi'=> $IT['nrStraturi'],
-            'msg' => $IT['msg']
+            'msg' => $IT['msg'],
+            'dci_Mm' => $IT['dci']
         ]);
 
-        if($contents_arr) {
-            return response()->json([
-                'status' => 'success',
-                'data' => $contents_arr
-            ]);
-        }
-        return response()->json([
-            'status' => 'fail',
-            'message' => 'failed to create content_arr record'
-        ]);
             
     }
 

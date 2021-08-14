@@ -25,6 +25,8 @@ class CreateDimensionareJTSTable extends Migration
             $table->string('spireStrat');
             $table->string('nrStraturi');
             $table->string('HBj_m');
+            $table->string('wj');
+            $table->string('msg');
             $table->timestamps();
         });
     }

@@ -23,6 +23,7 @@ class DimensionareIT extends Model
         'wiTotal',
         'nrSpire',
         'nrStraturi',
-        'msg'
+        'msg',
+        'dci_Mm'
     ];
 }

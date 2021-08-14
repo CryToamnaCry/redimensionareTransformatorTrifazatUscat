@@ -23,6 +23,7 @@ class CreatePredeterminareSectiuneConductorJTSTable extends Migration
             $table->string('scond_mm2');
             $table->string('dc_calc_mm');
             $table->string('aj_mm');
+            $table->string('dc_ales_mm',);
             $table->timestamps();
 
         });

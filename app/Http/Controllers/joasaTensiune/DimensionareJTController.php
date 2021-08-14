@@ -76,19 +76,16 @@ class DimensionareJTController extends Controller
         //verificam daca e nevoie sau nu sa adaugam canal de racire 
         $redimensionare = ExtraController::canalDeRacire($aoj_mm,$aj_mm,$spireStrat,$diz,$D_mm,$wj,$s_cond_mm2,$I2f);  
 
-    return array( 
-        'dateNominale_id'=>$id,
-        'Dmj_mm'=>$redimensionare['Dmj_mm'],
-        'Lmed_m'=>$redimensionare['LMed_m'],
-        'Rjt_ohm'=>$redimensionare['Rjt_ohm'],
-        'PjT_W'=>$redimensionare['PjT_W'],
-        'qjT_Wperm2'=>$redimensionare['qjT_Wperm2'],
-        'spireStrat' =>$spireStrat,
-        'nrStraturi' =>$nrStraturi,
-        'aj_mm' =>$redimensionare['aj_mm'],
-        'HBj_m'=>$redimensionare['HBj_m'] 
-        
-    );
+
+    $redimensionare+=[
+    'nominale_id'=>$dateNominale->id,
+    'wj' => $wj,
+    'spireStrat' =>$spireStrat,
+    'nrStraturi' =>$nrStraturi
+         
+    ];
+    return $redimensionare;
+
     }
 
     public function store(Request $request)
@@ -97,18 +94,20 @@ class DimensionareJTController extends Controller
         $coloana = $this->create($request);
      
         DimensionareJT::updateOrCreate([
-            'nominale_id' =>$coloana['dateNominale_id'] 
+            'nominale_id' =>$coloana['nominale_id'] 
         ],[
-            'nominale_id' =>$coloana['dateNominale_id'],
+            'nominale_id' =>$coloana['nominale_id'],
+            'wj' => $coloana['wj'],
             'Dmj_mm' => $coloana['Dmj_mm'],
-            'Lmed_m'=>$coloana['Lmed_m'],
+            'Lmed_m'=>$coloana['LMed_m'],
             'Rjt_ohm'=>$coloana['Rjt_ohm'],
             'PjT_W'=>$coloana['PjT_W'],
             'aj_mm'=>$coloana['aj_mm'],
             'qjT_Wperm2'=>$coloana['qjT_Wperm2'],
             'spireStrat' =>$coloana['spireStrat'],
             'nrStraturi' =>$coloana['nrStraturi'],
-            'HBj_m'=>$coloana['HBj_m']
+            'HBj_m'=>$coloana['HBj_m'],
+            'msg'=>$coloana['msg']
         ]);
    
       

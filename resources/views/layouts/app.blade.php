@@ -15,14 +15,21 @@
                 <a href="{{ route('home') }}" class="p-3">Home</a>
             </li>
             <li>
-                <a href="{{ route('dashboard') }}" class="p-3">Dashboard</a>
+                <a href="{{ route('dashboard') }}" class="p-3">Incarcare</a>
             </li>
             <li>
-                <a href="{{ route('redimensionare') }}" class="p-3">Redimensionare</a>
+                <a href="{{ route('redimensionare') }}" class="p-3">Estimare</a>
             </li>
             <li>
                 <a href="{{ route('posts') }}" class="p-3">Post</a>
             </li>
+            @if (auth()->user()->is_admin==1)
+            <li>
+                <a class="p-3" href="{{ route('admin') }}">
+                    Zona profesori
+                </a>
+            </li>
+            @endif
         </ul>
 
         <ul class="flex items-center">
@@ -40,6 +47,7 @@
                     </form>
                 </li>
             @endauth
+
 
             @guest
                 <li>

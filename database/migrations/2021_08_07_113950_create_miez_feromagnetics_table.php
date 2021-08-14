@@ -16,7 +16,6 @@ class CreateMiezFeromagneticsTable extends Migration
         Schema::create('miez_feromagnetics', function (Blueprint $table) {
             $table->id();
             $table->foreignId('nominale_id')->references('id')->on('date_nominales')->onDelete('cascade');
-            $table->string('PjT_W');
             $table->string('TrepteColoana_a_mm');
             $table->string('TrepteJug_b_mm');
             $table->string('Bc_T');
