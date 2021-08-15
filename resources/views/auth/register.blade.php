@@ -19,11 +19,17 @@
                 </div>
 
                 <div class="mb-4">
-                    <label for="username" class="sr-only">Username</label>
-                    <input type="text" name="username" id="username" placeholder="Your username" 
+                    <label for="username" class="sr-only">Grupa</label>
+                    <select name="username" id="username"  
                     value="{{ old('username') }}" class="bg-grey-100 border-2 w-full p-4 rounded-lg
                      @error('username') border-red-500  
                      @enderror">
+                        @foreach ($grupa as $grupUnit)
+                            <option>{{ $grupUnit }}</option>
+                        @endforeach
+                    </select>
+
+
                      
                      @error('username')
                          <div class="text-red-500 mt-2 text-sm">

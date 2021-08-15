@@ -171,7 +171,6 @@
             </div>
             <hr>
             {{-- 
-
                 Schema și grupa de conexiuni
             
             --}}
@@ -233,9 +232,7 @@
             </div>
             <hr>
             {{-- 
-
                 Tensiunea de scurtcircuit [%]
-
              --}}
             <div class="flex flex-wrap -mx-3 mb-5">
                 <div class="w-full  px-3  md:mb-0 mb-7 mt-5">
@@ -257,9 +254,7 @@
             </div>
             <hr>
                         {{-- 
-
                 Factor de forma
-
              --}}
              <div class="flex flex-wrap -mx-3 mb-5">
                 <div class="w-full px-3 mb-7 md:mb-0 mt-5">

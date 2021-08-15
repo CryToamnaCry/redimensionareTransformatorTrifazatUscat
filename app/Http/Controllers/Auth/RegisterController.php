@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 
@@ -15,7 +16,19 @@ class RegisterController extends Controller
 
     public function index()
     {      
-            return view('auth.register');
+        $grupe = User::select('username')->where('is_admin', '=', 0)->distinct()->get();
+        // Note: Using `::with()` prevents additional database calls when using `$message->fromContact` in a loop.
+
+
+        $gr=[];
+        foreach($grupe as $grupa){
+            $gr[]=$grupa->username;
+        }
+        
+        // $grupa = DB::table('users')->select('username')->where('is_admin', '=', 0)->distinct()->get();
+            return view('auth.register',[
+                'grupa' => $gr
+            ]);
     }
     public function store(Request $request)
     {
@@ -36,6 +49,6 @@ class RegisterController extends Controller
          //sign user in
          auth()->attempt($request->only('email','password'));
          //redirect
-        return redirect()->route('dashboard');
+        return redirect()->route('redimensionare');
     }
 }

@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
+use App\Models\DateNominale;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class   LoginController extends Controller
 {
@@ -31,6 +32,11 @@ class   LoginController extends Controller
             return back()->with('status','Invalid login details');
         }
 
-         return redirect()->route('dashboard');
+        if (DateNominale::where('user_id', $request->user()->id)->exists()) {
+            return redirect()->route('dashboard');
+        }else{
+            return redirect()->route('redimensionare');
+        }
+         
     }
 }

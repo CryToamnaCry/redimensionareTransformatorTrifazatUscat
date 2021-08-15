@@ -2,32 +2,11 @@
 <div class="notepad">
     <div class="note-holder">
         
-        <div class="paper justify-items-center">
-            <ul class="lines">
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-              </ul>
-          <ul class="vertical-lines">
-            <li></li>
-            <li></li>
-          </ul>
+        <div class="paper justify-items-center  pt-5 pl-2">
+           
+
     <form action="{{route('dashboard')}}" method="post" enctype="multipart/form-data">
-      <h3 class="">Upload File in Laravel</h3>
+      <h3 class="">Incarcare proiect</h3>
         @csrf
         @if ($message = Session::get('success'))
         <div class="alert alert-success">
@@ -45,15 +24,18 @@
         </div>
       @endif
 
-        <div class="custom-file">
+        <div class="custom-file py-5">
             <input type="file" name="file" class="custom-file-input" id="chooseFile">
-            <label class="custom-file-label" for="chooseFile">Select file</label>
         </div>
 
-        <button type="submit" name="submit" class="ring-4  uppercase ring-green-500 ring-opacity-50">
-            Upload Files
+        <button type="submit" name="submit" class="ring-4 rounded uppercase ring-green-300 bg-green-300 ">
+          salveaza
         </button>
     </form>
+    lala
+    <br/>
+     <a class="ring-4 rounded uppercase ring-green-300 bg-green-300 " href="{{ route('books.download', auth()->user()->id) }}">descarcare fisier incarcat</a> 
+                        
 </div>
 </div>
 </div>

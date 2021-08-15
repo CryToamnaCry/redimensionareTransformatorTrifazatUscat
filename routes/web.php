@@ -35,6 +35,7 @@ Route::get('/users/{user:username}/posts',[UserPostController::class,'index'])->
 
 Route::get('/dashboard',[DashboardController::class,'index'])->name('dashboard');
 Route::post('/dashboard',[DashboardController::class,'fileUpload']);
+Route::get('file/{user_id}/download',[DashboardController::class, 'download'])->name('books.download');
 
 // TTU
 Route::get('/redimensionare',[DateNominaleController::class,'index'])->name('redimensionare');

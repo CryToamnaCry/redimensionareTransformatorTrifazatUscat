@@ -11,6 +11,11 @@ class ViewMiezFeromgneticController extends Controller
     public function show($id)
     {
         $miez = MiezFeromagnetic::latest()->where('nominale_id',$id)->first();
+        if($miez==NULL){
+            return 'nu';
+        }else{
+
+        
 
         $detalii = array (
             'an' =>array (
@@ -36,5 +41,5 @@ class ViewMiezFeromgneticController extends Controller
           );
 
         return $detalii;
-    }
+    }}
 }

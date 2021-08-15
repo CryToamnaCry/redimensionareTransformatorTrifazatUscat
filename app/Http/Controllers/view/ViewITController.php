@@ -11,6 +11,9 @@ class ViewITController extends Controller
     public function show($id)
     {
         $IT = DimensionareIT::latest()->where('nominale_id',$id)->first();
+        if($IT==NULL){
+            return 'nu';
+        }else{
 
         $detalii = array (
             'wi' =>array (
@@ -80,5 +83,5 @@ class ViewITController extends Controller
           );
 
         return $detalii;
-    }
+    }}
 }

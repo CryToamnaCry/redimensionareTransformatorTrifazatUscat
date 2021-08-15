@@ -11,7 +11,9 @@ class ViewNominaleController extends Controller
     public function show($id)
     {
         $dateNominale = DateNominale::latest()->where('user_id',$id)->first();
-    
+        if($dateNominale==NULl){
+            return $detalii = 'nu';
+        }else{
      
         $detalii = array (
             'sn' =>array (
@@ -64,38 +66,43 @@ class ViewNominaleController extends Controller
           );
 
         return $detalii;
-    }
+    }}
     public function tolerante($id)
     {
         $dateNominale = DateNominale::latest()->where('user_id',$id)->first();
+        if($dateNominale==NULl){
+            return $detalii = 'nu';
+        }else{
+            return $detalii = array (
+                array (
+                    'denumire'=>'Tensiunea secundară la mers în gol',
+                    'valoare'=>'+/-0.5',
+                    'unit'=>'%'
+                ),
+                array (
+                    'denumire'=>'Tensiunea de scurtcircuit',
+                    'valoare'=>$dateNominale->uscn,
+                    'unit'=>'%'
+                ),
+                array (
+                    'denumire'=>'Puterea la scurtcircuit nominal',
+                    'valoare'=>'10',
+                    'unit'=>'%'
+                ),
+                array (
+                    'denumire'=>'Puterea la gol nominal',
+                    'valoare'=>'+15',
+                    'unit'=>'%'
+                ),
+                array (
+                    'denumire'=>'Factorul de forma al transformatorului',
+                    'valoare'=>$dateNominale->factorForma,
+                    'unit'=>''
+                )
+            );
+        }
 
 
-        return $detalii = array (
-            array (
-                'denumire'=>'Tensiunea secundară la mers în gol',
-                'valoare'=>'+/-0.5',
-                'unit'=>'%'
-            ),
-            array (
-                'denumire'=>'Tensiunea de scurtcircuit',
-                'valoare'=>$dateNominale->uscn,
-                'unit'=>'%'
-            ),
-            array (
-                'denumire'=>'Puterea la scurtcircuit nominal',
-                'valoare'=>'10',
-                'unit'=>'%'
-            ),
-            array (
-                'denumire'=>'Puterea la gol nominal',
-                'valoare'=>'+15',
-                'unit'=>'%'
-            ),
-            array (
-                'denumire'=>'Factorul de forma al transformatorului',
-                'valoare'=>$dateNominale->factorForma,
-                'unit'=>''
-            )
-        );
+        
     }
 }

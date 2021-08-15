@@ -16,6 +16,8 @@
         "postcss": "^8.1.14"
     },
     "dependencies": {
+        "@fortawesome/fontawesome-free": "^5.15.4",
+        "font-awesome": "^4.7.0",
         "mysql": "^2.18.1",
         "tailwindcss": "^2.1.2"
     }

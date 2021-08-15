@@ -1,4 +1,4 @@
-@props(['detalii'=> $detalii])
+@props(['detalii'=> $detalii,'title'=>$title])
 <x-sideMenu :detalii="$detalii" />
 
 <div class="flex justify-center " >
@@ -6,7 +6,7 @@
     <div class=" p-10  rounded-lg notepaper">
         <div class=" py-5" >
             <h1 class="text-lg font-medium text-blue-900 block" >
-              Proiectarea unui transformator trifazat cu regim uscat:
+              {{$title}}
             </h1>
           </div>
           @foreach ($detalii as $key => $value)
@@ -16,11 +16,12 @@
               
               {{$key}}
               
-              
+               
             </p>
           </div>
           
           <hr>
+          
           <x-nominale :value="$value" /> 
           @endforeach
 

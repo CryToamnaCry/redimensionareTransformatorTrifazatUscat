@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\upload\File;
 use Illuminate\Http\Request;
+
+use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\TTU\RedimensionareFinalaController;
 
 class DashboardController extends Controller
@@ -16,11 +18,30 @@ class DashboardController extends Controller
     {
         
         $final = new RedimensionareFinalaController;
-        $all = $final->takeFromDb($request->user()->id);
 
-        return view('dashboard',[
-            'detalii' => $all
-        ]);
+        $response = $final->takeFromDb($request->user()->id);
+        
+
+        $all = $response[0];
+
+        if($all["Valori nominale"]=="nu"){
+             return redirect()->route('redimensionare');
+        }else{
+            $title = $response[1];
+
+        
+            return view('dashboard',[
+                'detalii' => $all,
+                'title' => $title
+            ]);
+        }
+        
+    }
+    public function download($user_id)
+    {
+        $file = File::where('user_id', $user_id)->firstOrFail();
+        $pathToFile = storage_path('app/public/' .$file->file_path);
+        return response()->download($pathToFile);
     }
 
     public function fileUpload(Request $req)
@@ -37,7 +58,7 @@ class DashboardController extends Controller
                 $filePath = $req->file('file')->storeAs('uploads', $fileName, 'public');
     
                 $fileModel->name = time().'_'.$req->file->getClientOriginalName();
-                $fileModel->file_path = '/storage/' . $filePath;
+                $fileModel->file_path = $filePath;
                 $fileModel->save();
     
                 return back()

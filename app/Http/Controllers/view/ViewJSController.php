@@ -12,9 +12,12 @@ class ViewJSController extends Controller
 {
     public function show($id)
     {
-        $spire = PredimensionareSpiraJT::latest()->where('nominale_id',$id)->first();
+        
     
         $predimJT = PredeterminareSectiuneConductorJT::latest()->where('nominale_id',$id)->first();
+        if($predimJT==NULL){
+            return 'nu';
+        }else{
         $JT = DimensionareJT::latest()->where('nominale_id',$id)->first();
      
         $detalii = array (
@@ -76,5 +79,5 @@ class ViewJSController extends Controller
           );
 
         return $detalii;
-    }
+    }}
 }

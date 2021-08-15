@@ -6,15 +6,14 @@
     "license": "MIT",
     "require": {
         "php": "^7.3|^8.0",
+        "cartalyst/converter": "^6.0",
+        "components/font-awesome": "^5.15",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.12",
         "laravel/tinker": "^2.5",
-        "markrogoyski/math-php": "2.*",
-        "cartalyst/converter": "^6.0"
-
-
+        "markrogoyski/math-php": "2.*"
     },
     "repositories": [
         {

@@ -61,7 +61,7 @@ class RedimensionareFinalaController extends Controller
 
         $JS = new ViewJSController;
         $JS = $JS->show($id);
-
+        
         $IT = new ViewITController;
         $IT = $IT->show($id);
 
@@ -77,15 +77,20 @@ class RedimensionareFinalaController extends Controller
             'Calculul miezului feromagnetic'=>$miez
 
         );
-     return $all;
+        $title = 'Valori principale rezultate in urma estimarii unui transformator trifazat cu regim uscat folosind datele nominale introduse';
+     return [$all , $title];
 
     }
     public function show($id)
     {
-        $all = $this->takeFromDb($id);
+        $response = $this->takeFromDb($id);
+        $all = $response[0];
+        $title = $response[1];
     
+
         return view('TTU.final',[
-            'detalii' => $all
+            'detalii' => $all,
+            'title' => $title
         ]);
     }
 
