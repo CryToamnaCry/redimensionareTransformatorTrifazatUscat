@@ -40,6 +40,28 @@ class ViewMiezFeromgneticController extends Controller
             )
           );
 
+        // $detalii = array (
+        //     'an' =>array (
+        //         'denumire'=>'Dimensionarea trepelor pentru coloana [An]',
+        //         'valoare'=>'71 , 64 , 53 , 40 ',
+        //         'unit'=>'mm'                
+        //     ),
+        //     'bn'=>array (
+        //         'denumire'=>'Dimensionarea trepelor pentru jug[Bn]',
+        //         'valoare'=>'71 , 64 , 53 , 53',
+        //         'unit'=>'mm'                
+        //     ),
+        //     'bv'=>array (
+        //         'denumire'=>'Inductia in coloanal[Bc]',
+        //         'valoare'=>'1.59',
+        //         'unit'=>'T'                
+        //     ),
+        //     'bjug'=>array (
+        //         'denumire'=>'Inductia in jug[Bjug]',
+        //         'valoare'=>'1.51',
+        //         'unit'=>'T'              
+        //     )
+        //   );
         return $detalii;
     }}
 }

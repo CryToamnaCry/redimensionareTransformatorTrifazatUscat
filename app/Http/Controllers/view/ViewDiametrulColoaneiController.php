@@ -20,6 +20,11 @@ return 'nu';
             'valoare'=>$val->D_m,
             'unit'=>'m'                
         ));
+        //         $val = array (array (
+        //     'denumire'=>'Diametrul coloanei',
+        //     'valoare'=>'75',
+        //     'unit'=>'m'                
+        // ));
         return $val;
     }
 }

@@ -15,7 +15,7 @@
             <p class="text uppercase text-white">
               
               {{$key}}
-              
+              Grupa 141IE
                
             </p>
           </div>

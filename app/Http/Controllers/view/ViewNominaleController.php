@@ -11,7 +11,7 @@ class ViewNominaleController extends Controller
     public function show($id)
     {
         $dateNominale = DateNominale::latest()->where('user_id',$id)->first();
-        if($dateNominale==NULl){
+        if($dateNominale==NULL){
             return $detalii = 'nu';
         }else{
      
@@ -65,8 +65,58 @@ class ViewNominaleController extends Controller
             )
           );
 
+        //   $detalii = array (
+        //     'sn' =>array (
+        //         'denumire'=>'Putere nominala',
+        //         'valoare'=>'10',
+        //         'unit'=>'kVA'                
+        //     ),
+        //     'un'=>array (
+        //         'denumire'=>'Tensiuni nominale',
+        //         'valoare'=>'380'.' / '.'220',
+        //         'unit'=>'V'                
+        //     ),
+        //     'f'=>array (
+        //         'denumire'=>'Frecventa tensiunii de alimentare',
+        //         'valoare'=>'50',
+        //         'unit'=>'Hz'                
+        //     ),
+        //     'conex'=>array (
+        //         'denumire'=>'Schema și grupa de conexiuni',
+        //         'valoare'=>'Dd12',
+        //         'unit'=>''                
+        //     ),
+        //     'regim'=>array (
+        //         'denumire'=>'Regimul de funcționare',
+        //         'valoare'=>'Continuu 100%',  
+        //         'unit'=>''              
+        //     ),
+        //     'tip'=>array (
+        //         'denumire'=>'Tipul constructiv',
+        //         'valoare'=>'Asimetric, cu 3 coloane',   
+        //         'unit'=>''             
+        //     ),
+        //     'racire'=>array (
+        //         'denumire'=>'Sistemul de răcire',
+        //         'valoare'=>'natural', 
+        //         'unit'=>''               
+        //     ),
+        //     'izolatie'=>array (
+        //         'denumire'=>'Clasa termică de izolație',
+        //         'valoare'=>'F (115 C)',    
+        //         'unit'=>''            
+        //     ),
+        //     'materialele'=>array (
+        //         'denumire'=>'Materialele active',
+        //         'valoare'=>'Cupru pentru înfășurări .
+        //             Tablă laminată la rece cu cristale orientate, miezul feromagnetic',
+        //             'unit'=>''                
+                               
+        //     )
+        //   );
         return $detalii;
-    }}
+    }
+}
     public function tolerante($id)
     {
         $dateNominale = DateNominale::latest()->where('user_id',$id)->first();
@@ -81,7 +131,7 @@ class ViewNominaleController extends Controller
                 ),
                 array (
                     'denumire'=>'Tensiunea de scurtcircuit',
-                    'valoare'=>$dateNominale->uscn,
+                    'valoare'=>'5',
                     'unit'=>'%'
                 ),
                 array (
@@ -96,7 +146,7 @@ class ViewNominaleController extends Controller
                 ),
                 array (
                     'denumire'=>'Factorul de forma al transformatorului',
-                    'valoare'=>$dateNominale->factorForma,
+                    'valoare'=>'2.5',
                     'unit'=>''
                 )
             );

@@ -50,17 +50,19 @@ class DashboardController extends Controller
             'file' => 'required|mimes:csv,txt,xlx,xls,pdf|max:2048'
             ]);
     
-            $fileModel = new File;
-    
             if($req->file()) {
                 $fileName = time().'_'.$req->file->getClientOriginalName();
-                $fileModel->user_id = $req->user()->id;
+                $user_id = $req->user()->id;
                 $filePath = $req->file('file')->storeAs('uploads', $fileName, 'public');
-    
-                $fileModel->name = time().'_'.$req->file->getClientOriginalName();
-                $fileModel->file_path = $filePath;
-                $fileModel->save();
-    
+
+                File::updateOrCreate([
+                    'user_id' => $user_id 
+                ],[
+                    'user_id' => $user_id,
+                    'name' => $fileName,
+                    'file_path' => $filePath
+                ]);
+                
                 return back()
                 ->with('success','File has been uploaded.')
                 ->with('file', $fileName);

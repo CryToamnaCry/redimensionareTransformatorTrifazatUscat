@@ -32,9 +32,9 @@
           salveaza
         </button>
     </form>
-    lala
+   
     <br/>
-     <a class="ring-4 rounded uppercase ring-green-300 bg-green-300 " href="{{ route('books.download', auth()->user()->id) }}">descarcare fisier incarcat</a> 
+     <a class=" link rounded  text-red-500 hover:underline" href="{{ route('books.download', auth()->user()->id) }}">Descarcare fisier incarcat</a> 
                         
 </div>
 </div>

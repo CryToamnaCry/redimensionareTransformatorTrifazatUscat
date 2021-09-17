@@ -77,7 +77,63 @@ class ViewJSController extends Controller
                 'unit'=>'-'              
             )
           );
-
+        // $detalii = array (
+        //     'wj' =>array (
+        //         'denumire'=>'Numărul de spire folosit[wj]',
+        //         'valoare'=>'201',
+        //         'unit'=>'spire'                
+        //     ),
+        //     'dc'=>array (
+        //         'denumire'=>'Diametrul conductorul folosit[dc]',
+        //         'valoare'=>'2.5',
+        //         'unit'=>'Mn'                
+        //     ),
+        //     'spire'=>array (
+        //         'denumire'=>'Numărul de spire pe strat',
+        //         'valoare'=>'55',
+        //         'unit'=>'spire/strat'                
+        //     ),
+        //     'strat'=>array (
+        //         'denumire'=>'Numărul de straturi',
+        //         'valoare'=>'4',
+        //         'unit'=>'strat'              
+        //     ),
+        //     'aj'=>array (
+        //         'denumire'=>'Lățimea bobinajului[aj]',
+        //         'valoare'=>'15.4',
+        //         'unit'=>'mm'              
+        //     ),
+        //     'HBj'=>array (
+        //         'denumire'=>'Inălțimea bobinajului[HBj]',
+        //         'valoare'=>'159.6',
+        //         'unit'=>'mm'              
+        //     ),
+        //     'dm'=>array (
+        //         'denumire'=>'Diametrul mediu[Dmj]',
+        //         'valoare'=>'110.4',
+        //         'unit'=>'mm'              
+        //     ),
+        //     'rezistenta'=>array (
+        //         'denumire'=>'Rezistența[RjT]',
+        //         'valoare'=>'0.35',
+        //         'unit'=>'ohm'              
+        //     ),
+        //     'qj'=>array (
+        //         'denumire'=>'Densitatea de cedare a căldurii[qj]',
+        //         'valoare'=>'281.99',
+        //         'unit'=>'W/m^2'              
+        //     ),
+        //     'pierderi'=>array (
+        //         'denumire'=>'Pierderile Joule[PjT]',
+        //         'valoare'=>'187.31',
+        //         'unit'=>'W'              
+        //     ),
+        //     'pierderi'=>array (
+        //         'denumire'=>'Canal de racire',
+        //         'valoare'=>$JT->msg,
+        //         'unit'=>'-'              
+        //     )
+        //   );
         return $detalii;
     }}
 }

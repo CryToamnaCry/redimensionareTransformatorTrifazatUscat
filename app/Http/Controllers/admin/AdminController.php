@@ -18,7 +18,6 @@ class AdminController extends Controller
             ->get()
             ->groupBy('users.username')
             ->toArray();
-             
         $title = 'Proiecte incarcate:';
 
 

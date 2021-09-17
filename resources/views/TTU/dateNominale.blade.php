@@ -6,12 +6,17 @@
     <div class=" px-20  rounded-lg w-8/12 notepaper">
         <div class="px-4 py-5 sticker" >
             <h1 class=" text-gray-900  uppercase text" >
-              Applicant Information
+                Tema de proiect
             </h1>
+           
           </div>
           <hr>
-
+          
         <form action="{{route('redimensionare')}}" method="post" class="mb-4 border-t">
+
+            <p class=" text-gray-700 text" >
+                Să se proiecteze un transformator trifazat uscat cu următoarele date nominale:
+            </p>
             @csrf
             {{-- 
                 
@@ -215,7 +220,7 @@
                     </div>
                 </div>
                 <div class="w-full  px-3 md:w-1/5  md:mb-0 tracking-wide">
-                    <label class="block  tracking-wide text-white text-xs font-bold mb-2" for="grConex">
+                    <label class="block  tracking-wide text-gray-700 text-xs font-bold mb-2" for="grConex">
                         Unit
                         </label>
                     <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500
